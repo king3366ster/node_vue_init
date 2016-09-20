@@ -1,0 +1,32 @@
+{
+  "name": "node_npm_init",
+  "version": "1.0.0",
+  "description": "frontend npm init framework",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test",
+    "build:css": "postcss --config webapp/build/postcss.js"
+  },
+  "keywords": [
+    "frontend",
+    "postcss",
+    "webpack"
+  ],
+  "author": "king3366ster",
+  "license": "ISC",
+  "devDependencies": {
+    "autoprefixer": "^6.4.1",
+    "cssnano": "^3.7.5",
+    "cssnext": "^1.8.4",
+    "npm-run-all": "^3.1.0",
+    "postcss": "^5.2.0",
+    "postcss-calc": "^5.3.1",
+    "postcss-custom-properties": "^5.0.1",
+    "postcss-mixins": "^5.2.0",
+    "postcss-nested": "^1.0.0",
+    "postcss-scss": "^0.3.0",
+    "postcss-simple-vars": "^3.0.0",
+    "precss": "^1.4.0",
+    "rimraf": "^2.5.4"
+  }
+}
