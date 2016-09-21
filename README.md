@@ -1,2 +1,2 @@
 # node_npm_init
-npm init framework for webpack and post (frontend) and koa (backend)
+npm init framework for webpack and postcss (frontend) and koa (backend) with babel for es6 compatible
