@@ -4,7 +4,7 @@ const postcss = require('postcss')
 const precss = require('precss')
 
 let config = {
-  input: './webapp/src/postcss/**/*.css',
+  input: './webapp/src/css/**/*.css',
   dir: './webapp/dist/css',
   'local-plugins': true,
   use: [
