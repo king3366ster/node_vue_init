@@ -1,6 +1,5 @@
 {
   "presets": [
-    ["es2016"],
     ["es2015", {"loose": true, "modules": "commonjs"}],
     ["stage-2"]
   ],
