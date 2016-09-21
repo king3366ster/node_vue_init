@@ -1,17 +1,29 @@
 const cwd = process.cwd()
 const path = require('path')
+const globby = require('globby')
+const postcss = require('postcss')
+const babelLoader = require('babel-loader')
 const webpack = require('webpack')
-const commonsPlugin = new webpack.optimize.CommonsChunkPlugin('common.js');
 const webappPath = path.join(__dirname, '../')
+const excludeJS = /(node_modules)/
+
+function generateEntry (path) {
+  let globbyPaths = webappPath + path
+  let paths = globby.sync(globbyPaths)
+  let basePath = globbyPaths.replace(/[\*].*?$/, '').replace(/\\/g, '/')
+
+  let result = {}
+  paths.forEach(item => {
+    item = item.replace(/\\/g, '/')
+    result[item.replace(basePath, '').replace(/\.(js|css)$/, '')] = item.replace(/\.(js|css)$/,'')
+  })
+  return result
+}
 
 module.exports = {
-  //插件项
-  plugins: [commonsPlugin],
   context: webappPath,
   //页面入口文件配置
-  entry: [
-    path.join(webappPath, 'src/js/test')
-  ],
+  entry: generateEntry('src/js/**/*.*'),
   //入口文件输出配置
   output: {
     path: path.join(webappPath, 'dist/js'),
@@ -20,19 +32,36 @@ module.exports = {
   module: {
     //加载器配置
     loaders: [
-      { test: /\.css$/, loader: 'style-loader!css-loader' },
-      // { test: /\.js$/, loader: 'jsx-loader?harmony' },
-      // { test: /\.scss$/, loader: 'style!css!sass?sourceMap'},
-      { test: /\.(png|jpg)$/, loader: 'url-loader?limit=8192'}
+      { test: /\.html$/, loader: 'raw'},
+      { test: /\.css$/, loader: 'style!css!postcss' },
+      { test: /\.js$/, exclude: excludeJS, loader: 'babel-loader'},
+      {
+        test: /\.(png|jpg|jpeg|gif|svg)$/,
+        loader: 'url',
+        query: {
+          // limit for base64 inlining in bytes
+          limit: 4096,
+          name: '[name].[ext]?[hash]'
+        }
+      }
     ]
   },
   //其它解决方案配置
   resolve: {
     root: [
-      path.join(webappPath, 'src')
-    ], //绝对路径
+      path.join(webappPath, 'src/js'),
+    ],
     extensions: ['', '.js', '.json', '.css'],
     alias: {
     }
-  }
-};
+  },
+  resolveLoader: {
+    root: [
+      path.resolve(webappPath, '../node_modules')
+    ]
+  },
+  plugins: [
+    new webpack.optimize.UglifyJsPlugin({minimize: true}),
+    new webpack.optimize.CommonsChunkPlugin('common.js')
+  ]
+}

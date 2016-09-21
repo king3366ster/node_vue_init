@@ -1,6 +1,4 @@
-// require("../css/test.css")
-const t = 3
+import 'babel-polyfill'
 
-((p) => {
- console.log(p)
-})(t)
+import * as testModel from 'modules/testModule'
+let res = testModel.timeoutFn()
