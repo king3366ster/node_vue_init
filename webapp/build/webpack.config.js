@@ -2,7 +2,6 @@ const cwd = process.cwd()
 const path = require('path')
 const globby = require('globby')
 const postcss = require('postcss')
-const babelLoader = require('babel-loader')
 const webpack = require('webpack')
 const webappPath = path.join(__dirname, '../')
 const excludeJS = /(node_modules)/
@@ -33,7 +32,7 @@ module.exports = {
     //加载器配置
     loaders: [
       { test: /\.html$/, loader: 'raw'},
-      { test: /\.css$/, loader: 'style!css!postcss' },
+      { test: /\.css$/, loader: 'style!css!postcss!autoprefixer' },
       { test: /\.js$/, exclude: excludeJS, loader: 'babel-loader'},
       {
         test: /\.(png|jpg|jpeg|gif|svg)$/,
@@ -60,6 +59,7 @@ module.exports = {
       path.resolve(webappPath, '../node_modules')
     ]
   },
+  devtool: 'eval-source-map',
   plugins: [
     new webpack.optimize.UglifyJsPlugin({minimize: true}),
     new webpack.optimize.CommonsChunkPlugin('common.js')

@@ -1,5 +1,5 @@
 function testTimeout (timeout) {
-  return new Promise(() => {
+  return new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve(timeout)
     }, timeout)
