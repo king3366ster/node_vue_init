@@ -59,7 +59,7 @@ module.exports = {
       path.resolve(webappPath, '../node_modules')
     ]
   },
-  devtool: 'eval-source-map',
+  devtool: 'cheap-module-source-map',
   plugins: [
     new webpack.optimize.UglifyJsPlugin({minimize: true}),
     new webpack.optimize.CommonsChunkPlugin('common.js')
