@@ -5,8 +5,13 @@
   "main": "index.js",
   "scripts": {
     "test": "npm test",
-    "build:css": "postcss --config webapp/build/postcss.js --progress --colors --watch",
-    "build:js": "webpack --config webapp/build/webpack.config.js --progress --colors --watch"
+    "clean": "run-p -lns clean:*",
+    "clean:css": "rimraf webapp/dist/css",
+    "clean:js": "rimraf webapp/dist/js",
+    "build": "run-p -lns build:*",
+    "build:css": "postcss --config webapp/build/postcss.js --progress --silent --colors --watch",
+    "build:js": "webpack --config webapp/build/webpack.config.js --progress --silent --watch",
+    "dev": "run-s -lns clean build"
   },
   "keywords": [
     "frontend",
@@ -20,6 +25,8 @@
     "babel": "^6.5.2",
     "babel-core": "^6.14.0",
     "babel-loader": "^6.2.5",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-polyfill": "^6.13.0",
     "babel-preset-es2015": "^6.14.0",
     "babel-preset-stage-2": "^6.13.0",
     "babel-register": "^6.14.0",

@@ -18,6 +18,7 @@ let config = {
     'postcss-nested',
     // 'postcss-scss',
     // 'cssnano',
+    // 'cssnext',
     'autoprefixer',
     'cssnext'
   ],

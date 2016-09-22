@@ -28,12 +28,24 @@ module.exports = {
     path: path.join(webappPath, 'dist/js'),
     filename: '[name].js'
   },
+  babel: {
+    presets: [
+      ['stage-2'],
+      ['es2015', {'loose': true, 'modules': 'commonjs'}]
+    ],
+    cacheDirectory: true,
+    plugins: [
+      'add-module-exports'
+      // 'transform-es3-property-literals',
+      // 'transform-es3-member-expression-literals'
+    ]
+  },
   module: {
     //加载器配置
     loaders: [
       { test: /\.html$/, loader: 'raw'},
       { test: /\.css$/, loader: 'style!css!postcss!autoprefixer' },
-      { test: /\.js$/, exclude: excludeJS, loader: 'babel-loader'},
+      { test: /\.js$/, exclude: excludeJS, loader: 'babel'},
       {
         test: /\.(png|jpg|jpeg|gif|svg)$/,
         loader: 'url',
@@ -61,7 +73,7 @@ module.exports = {
   },
   devtool: 'cheap-module-source-map',
   plugins: [
-    new webpack.optimize.UglifyJsPlugin({minimize: true}),
-    new webpack.optimize.CommonsChunkPlugin('common.js')
+    // new webpack.optimize.UglifyJsPlugin({minimize: true}),
+    // new webpack.optimize.CommonsChunkPlugin('common.js')
   ]
 }
