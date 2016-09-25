@@ -18,9 +18,8 @@ let config = {
     'postcss-nested',
     // 'postcss-scss',
     // 'cssnano',
-    // 'cssnext',
-    'autoprefixer',
-    'cssnext'
+    // 'autoprefixer',
+    'postcss-cssnext'
   ],
   autoprefixer: {
     browsers: ['Android >= 4', 'iOS >= 7', 'Chrome >= 10', 'Firefox >= 10', 'IE >= 8']
