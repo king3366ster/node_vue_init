@@ -5,7 +5,14 @@
   </head>
   <body>
     <div id="learn-vue" v-bind:class="{isSeen: seen}">
-      <input type="text" v-model="message" v-bind:class="[classA, classB]" v-on:keyup.enter="keyupFn">
+      <p>
+        Key Modifiers: v-on:keyup.13<br/>
+        enter/tab/delete (captures both “Delete” and “Backspace” keys)/esc/space/up/down/left/right
+        Input Modifiers: v-model.lazy
+        .lazy/.number/.trim
+      </p>
+      <input type="text" v-model="message" v-bind:class="[classA, classB]"
+      v-on:keyup.enter="keyupFn">
       <div v-once>{{message}} render once</div>
       <div v-html="message"></div>
       <div :id="id">
@@ -19,7 +26,10 @@
         {{watchedValue}} watched value
       </div>
       <a v-bind:href="url">link test</a>
-      <button @click="reverseMessage">Reverse Message</button>
+      <p>
+        events: .stop/.prevent/.capture/.self
+      </p>
+      <button @click.prevent="reverseMessage">Reverse Message</button>
       <div>
         v-if has higher toggle costs while v-show has higher initial render costs.
       </div>
@@ -47,9 +57,12 @@
         </ol>
       </form>
     </div>
-    <!-- <div id="test">
-      <app></app>
-    </div> -->
+    <div id="test-component">
+      <!-- <app></app> -->
+      total: {{total}}
+      <simple-counter prop-c="cdata" v-on:increment="incrementTotal"></simple-counter>
+      <simple-counter :prop-c="fdata" v-on:increment="incrementTotal"></simple-counter>
+    </div>
     <script src="../dist/js/test.js"></script>
   </body>
 </html>

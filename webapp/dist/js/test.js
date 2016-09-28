@@ -69,6 +69,10 @@
 	(0, _testModule3.default)();
 	var res = testModel.timeoutFn();
 
+	/**
+	 * test basic fn
+	 */
+
 	_vue2.default.component('todo', {
 	  props: ['todo'],
 	  template: '<li>{{ todo.text }}</li>'
@@ -135,11 +139,66 @@
 	  }
 	});
 
-	// new Vue({
-	//   el: '#test',
-	//   components: { App }
-	//   // template: '<app></app>'
-	// })
+	_vue2.default.set(app.todos, 2, { text: 'reset value' });
+
+	/**
+	 * test components
+	 */
+
+	_vue2.default.component('simple-counter', {
+	  template: '<div><button @click="increment">{{ counter }}</button><p>{{propC}}</p></div>',
+	  props: {
+	    propC: {
+	      type: String,
+	      required: true
+	    },
+	    // a number with default value
+	    propD: {
+	      type: Number,
+	      default: 100
+	    },
+	    // object/array defaults should be returned from a
+	    // factory function
+	    propE: {
+	      type: Object,
+	      default: function _default() {
+	        return { message: 'hello' };
+	      }
+	    },
+	    // custom validator function
+	    propF: {
+	      validator: function validator(value) {
+	        return value > 10;
+	      }
+	    }
+	  },
+	  data: function data() {
+	    return {
+	      counter: 0
+	    };
+	  },
+	  methods: {
+	    increment: function increment() {
+	      this.counter += 1;
+	      this.$emit('increment');
+	    }
+	  }
+	});
+
+	new _vue2.default({
+	  el: '#test-component',
+	  data: {
+	    fdata: 'parent data',
+	    total: 0
+	  },
+	  methods: {
+	    incrementTotal: function incrementTotal() {
+	      this.total += 1;
+	    }
+	  }
+	  // components: { App }
+	  // template: '<app></app>'
+	});
 
 	// new Vue({
 	//   render: h => h(App),

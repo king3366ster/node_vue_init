@@ -6,6 +6,10 @@ let res = testModel.timeoutFn()
 import Vue from 'vue'
 import App from 'components/App'
 
+/**
+ * test basic fn
+ */
+
 Vue.component('todo', {
   props: ['todo'],
   template: '<li>{{ todo.text }}</li>'
@@ -76,11 +80,67 @@ var app = new Vue({
   }
 })
 
-// new Vue({
-//   el: '#test',
-//   components: { App }
-//   // template: '<app></app>'
-// })
+Vue.set(app.todos, 2, {text: 'reset value'})
+
+/**
+ * test components
+ */
+
+Vue.component('simple-counter', {
+  template:
+    '<div><button @click="increment">{{ counter }}</button><p>{{propC}}</p></div>',
+  props: {
+    propC: {
+      type: String,
+      required: true
+    },
+    // a number with default value
+    propD: {
+      type: Number,
+      default: 100
+    },
+    // object/array defaults should be returned from a
+    // factory function
+    propE: {
+      type: Object,
+      default: function () {
+        return { message: 'hello' }
+      }
+    },
+    // custom validator function
+    propF: {
+      validator: function (value) {
+        return value > 10
+      }
+    }
+  },
+  data: function () {
+    return {
+       counter: 0
+    }
+  },
+  methods: {
+    increment: function () {
+      this.counter += 1
+      this.$emit('increment')
+    }
+  }
+})
+
+new Vue({
+  el: '#test-component',
+  data: {
+    fdata: 'parent data',
+    total: 0
+  },
+  methods: {
+    incrementTotal: function () {
+      this.total += 1
+    }
+  }
+  // components: { App }
+  // template: '<app></app>'
+})
 
 // new Vue({
 //   render: h => h(App),
