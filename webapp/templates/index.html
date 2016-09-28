@@ -1,0 +1,55 @@
+<html>
+  <head>
+    <title>test</title>
+    <link rel="stylesheet" href="../dist/css/test.css">
+  </head>
+  <body>
+    <div id="learn-vue" v-bind:class="{isSeen: seen}">
+      <input type="text" v-model="message" v-bind:class="[classA, classB]" v-on:keyup.enter="keyupFn">
+      <div v-once>{{message}} render once</div>
+      <div v-html="message"></div>
+      <div :id="id">
+        {{message|capitalize}}
+        filter capitalized
+      </div>
+      <div>
+        {{reverseMessageCp}} computed value
+      </div>
+      <div class="">
+        {{watchedValue}} watched value
+      </div>
+      <a v-bind:href="url">link test</a>
+      <button @click="reverseMessage">Reverse Message</button>
+      <div>
+        v-if has higher toggle costs while v-show has higher initial render costs.
+      </div>
+      <template v-if="seen">
+        <p>
+          v-if seen {{number + 1}}
+        </p>
+      </template>
+      <template v-else>
+        <p>
+          v-else seen {{number - 1}}
+        </p>
+      </template>
+      <div v-show="seen">
+        v-show test
+      </div>
+      <ul>
+        <li v-for="(value, key, index) in objs">{{key}}-{{value}}</li>
+        <span v-for="n in 10">{{n}}</span>
+      </ul>
+      <form v-on:submit.prevent="onSubmit">
+        form data
+        <ol>
+          <todo v-for="todo of todos" :todo='todo'></todo>
+        </ol>
+      </form>
+    </div>
+    <!-- <div id="test">
+      <app></app>
+    </div> -->
+    <script src="../dist/js/test.js"></script>
+  </body>
+</html>

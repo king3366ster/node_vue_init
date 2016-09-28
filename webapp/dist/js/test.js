@@ -69,18 +69,69 @@
 	(0, _testModule3.default)();
 	var res = testModel.timeoutFn();
 
+	_vue2.default.component('todo', {
+	  props: ['todo'],
+	  template: '<li>{{ todo.text }}</li>'
+	});
+
 	var app = new _vue2.default({
 	  el: '#learn-vue',
 	  data: {
 	    id: 'inspect-me',
-	    message: 'Hello Vue!',
+	    message: 'hello vue! ok',
+	    watchedValue: 'computed message',
+	    url: 'httptest',
+	    number: 12,
 	    seen: true,
-	    todos: [{ text: 'Learn JavaScript' }, { text: 'Learn Vue' }, { text: 'Build something awesome' }]
+	    classA: 'cla',
+	    classB: 'clb',
+	    todos: [{ text: 'Learn JavaScript' }, { text: 'Learn Vue' }, { text: 'Build something awesome' }],
+	    objs: {
+	      obja: 1,
+	      objb: 2,
+	      objc: 3
+	    }
 	  },
+	  // methods calculating realtime
 	  methods: {
 	    reverseMessage: function reverseMessage() {
 	      this.message = this.message.split('').reverse().join('');
+	    },
+	    keyupFn: function keyupFn() {
+	      console.log('key up');
 	    }
+	  },
+	  // computed properties are cached based on its dependencies
+	  computed: {
+	    reverseMessageCp: function reverseMessageCp() {
+	      return this.message + Date.parse(new Date());
+	    }
+	  },
+	  // When you have some data that needs to change based on some other data, it is tempting to overuse watch
+	  // However, it is often a better idea to use a computed property rather than an imperative watch callback.
+	  watch: {
+	    message: function message(val) {
+	      this.watchedValue = val.slice(2, 10);
+	    }
+	  },
+	  filters: {
+	    capitalize: function capitalize(value) {
+	      if (!value) return '';
+	      value = value.toString();
+	      return value.charAt(0).toUpperCase() + value.slice(1);
+	    }
+	  },
+	  created: function created() {
+	    console.log('a is ' + this.seen);
+	  },
+	  mounted: function mounted() {
+	    console.log('b is mounted');
+	  },
+	  updated: function updated() {
+	    console.log('c is updated');
+	  },
+	  destroyed: function destroyed() {
+	    console.log('d is destroyed');
 	  }
 	});
 
