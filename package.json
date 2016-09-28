@@ -9,9 +9,13 @@
     "clean:css": "rimraf webapp/dist/css",
     "clean:js": "rimraf webapp/dist/js",
     "build": "run-p -lns build:*",
-    "build:css": "postcss --config webapp/build/postcss.config.js --progress --silent --colors --watch",
+    "build:css": "postcss --config webapp/build/postcss.config.js --progress --silent --watch",
     "build:js": "webpack --config webapp/build/webpack.config.js --progress --silent --watch",
-    "dev": "run-s -lns clean build"
+    "watch": "run-p watch:*",
+    "watch:css": "npm run build:css --silent -- --watch",
+    "watch:js": "npm run build:js --silent -- --watch",
+    "dev": "npm run watch",
+    "dev:t": "run-s -lns clean build"
   },
   "keywords": [
     "frontend",

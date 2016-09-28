@@ -46,6 +46,7 @@ module.exports = {
       { test: /\.html$/, loader: 'raw'},
       { test: /\.css$/, loader: 'style!css!postcss!autoprefixer' },
       { test: /\.js$/, exclude: excludeJS, loader: 'babel'},
+      { test: /\.vue$/, loader: 'vue'},
       {
         test: /\.(png|jpg|jpeg|gif|svg)$/,
         loader: 'url',
@@ -62,8 +63,10 @@ module.exports = {
     root: [
       path.join(webappPath, 'src/js'),
     ],
-    extensions: ['', '.js', '.json', '.css'],
+    extensions: ['', '.js', '.json', '.css', '.vue'],
     alias: {
+      'components': path.resolve(webappPath, './src/components'),
+      'modules': path.resolve(webappPath, './src/modules')
     }
   },
   resolveLoader: {
