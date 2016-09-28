@@ -62,6 +62,9 @@
       total: {{total}}
       <simple-counter prop-c="cdata" v-on:increment="incrementTotal"></simple-counter>
       <simple-counter :prop-c="fdata" v-on:increment="incrementTotal"></simple-counter>
+      <component v-bind:is="currentView">
+          <!-- component changes when vm.currentView changes! -->
+      </component>
     </div>
     <script src="../dist/js/test.js"></script>
   </body>

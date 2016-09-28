@@ -86,7 +86,7 @@ Vue.set(app.todos, 2, {text: 'reset value'})
  * test components
  */
 
-Vue.component('simple-counter', {
+var Foo = Vue.component('simple-counter', {
   template:
     '<div><button @click="increment">{{ counter }}</button><p>{{propC}}</p></div>',
   props: {
@@ -131,14 +131,15 @@ new Vue({
   el: '#test-component',
   data: {
     fdata: 'parent data',
-    total: 0
+    total: 0,
+    currentView: 'App'
   },
   methods: {
     incrementTotal: function () {
       this.total += 1
     }
-  }
-  // components: { App }
+  },
+  components: { App, Foo }
   // template: '<app></app>'
 })
 

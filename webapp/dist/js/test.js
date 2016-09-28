@@ -145,7 +145,7 @@
 	 * test components
 	 */
 
-	_vue2.default.component('simple-counter', {
+	var Foo = _vue2.default.component('simple-counter', {
 	  template: '<div><button @click="increment">{{ counter }}</button><p>{{propC}}</p></div>',
 	  props: {
 	    propC: {
@@ -189,14 +189,15 @@
 	  el: '#test-component',
 	  data: {
 	    fdata: 'parent data',
-	    total: 0
+	    total: 0,
+	    currentView: 'App'
 	  },
 	  methods: {
 	    incrementTotal: function incrementTotal() {
 	      this.total += 1;
 	    }
-	  }
-	  // components: { App }
+	  },
+	  components: { App: _App2.default, Foo: Foo }
 	  // template: '<app></app>'
 	});
 
