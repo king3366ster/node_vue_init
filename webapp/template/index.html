@@ -1,12 +1,22 @@
 <html>
-	<head>
-		<title>test</title>
-		<link rel="stylesheet" href="../dist/css/test.css">
-	</head>
-	<body>
-        <div id="test">
-            <app></app>
-        </div>
-		<script src="../dist/js/test.js"></script>
-	</body>
+  <head>
+    <title>test</title>
+    <link rel="stylesheet" href="../dist/css/test.css">
+  </head>
+  <body>
+    <div id="learn-vue">
+      <span v-bind:id="id">{{message}}</span>
+      <p v-if="seen">if seen</p>
+      <ol>
+        <li v-for="todo in todos">
+          {{ todo.text }}
+        </li>
+      </ol>
+      <button v-on:click="reverseMessage">Reverse Message</button>
+    </div>
+    <!-- <div id="test">
+      <app></app>
+    </div> -->
+    <script src="../dist/js/test.js"></script>
+  </body>
 </html>

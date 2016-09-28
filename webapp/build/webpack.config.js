@@ -22,7 +22,7 @@ function generateEntry (path) {
 module.exports = {
   context: webappPath,
   //页面入口文件配置
-  entry: generateEntry('src/js/**/*.*'),
+  entry: generateEntry('src/js/entry/**/*.*'),
   //入口文件输出配置
   output: {
     path: path.join(webappPath, 'dist/js'),
@@ -66,8 +66,6 @@ module.exports = {
     ],
     extensions: ['', '.js', '.json', '.css', '.vue'],
     alias: {
-      'components': path.resolve(webappPath, './src/components'),
-      'modules': path.resolve(webappPath, './src/modules'),
       'vue': 'vue/dist/vue.js'
     }
   },
