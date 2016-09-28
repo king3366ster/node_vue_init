@@ -35,7 +35,8 @@ module.exports = {
     ],
     cacheDirectory: true,
     plugins: [
-      'add-module-exports'
+      'add-module-exports',
+      'transform-runtime'
       // 'transform-es3-property-literals',
       // 'transform-es3-member-expression-literals'
     ]
@@ -43,7 +44,7 @@ module.exports = {
   module: {
     //加载器配置
     loaders: [
-      { test: /\.html$/, loader: 'raw'},
+      { test: /\.html$/, loader: 'vue-html'},
       { test: /\.css$/, loader: 'style!css!postcss!autoprefixer' },
       { test: /\.js$/, exclude: excludeJS, loader: 'babel'},
       { test: /\.vue$/, loader: 'vue'},
@@ -66,7 +67,8 @@ module.exports = {
     extensions: ['', '.js', '.json', '.css', '.vue'],
     alias: {
       'components': path.resolve(webappPath, './src/components'),
-      'modules': path.resolve(webappPath, './src/modules')
+      'modules': path.resolve(webappPath, './src/modules'),
+      'vue': 'vue/dist/vue.js'
     }
   },
   resolveLoader: {
