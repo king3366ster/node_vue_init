@@ -30,7 +30,7 @@ module.exports = {
   },
   babel: {
     presets: [
-      ['stage-2'],
+      ['stage-0'],
       ['es2015', {'loose': true, 'modules': 'commonjs'}]
     ],
     cacheDirectory: true,
