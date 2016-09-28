@@ -70,7 +70,7 @@ module.exports = {
     }
   },
   resolveLoader: {
-    root: [
+    fallback: [
       path.resolve(webappPath, '../node_modules')
     ]
   },

@@ -12,8 +12,8 @@
     "build:css": "postcss --config webapp/build/postcss.config.js --progress --silent --watch",
     "build:js": "webpack --config webapp/build/webpack.config.js --progress --silent --watch",
     "watch": "run-p watch:*",
-    "watch:css": "npm run build:css --silent -- --watch",
-    "watch:js": "npm run build:js --silent -- --watch",
+    "watch:css": "npm run build:css --progress --silent -- --watch",
+    "watch:js": "npm run build:js --progress --silent -- --watch",
     "dev": "npm run watch",
     "dev:t": "run-s -lns clean build"
   },
