@@ -42,11 +42,24 @@ module.exports = {
       // 'transform-es3-member-expression-literals'
     ]
   },
+  vue: {
+    autoprefixer: false,
+    postcss: [
+      require('postcss-custom-properties')(),
+      require('postcss-calc')(),
+      require('postcss-simple-vars')(),
+      require('postcss-mixins')(),
+      require('postcss-nested')(),
+      require('postcss-cssnext')({
+        browsers: ['Android >= 4', 'iOS >= 7', 'Chrome >= 10', 'Firefox >= 10', 'IE >= 8']
+      })
+    ]
+  },
   module: {
     //加载器配置
     loaders: [
       { test: /\.html$/, loader: 'vue-html'},
-      { test: /\.css$/, loader: 'style!css!postcss!autoprefixer' },
+      { test: /\.css$/, loader: 'style!css!postcss!postcss-cssnext' },
       { test: /\.js$/, exclude: excludeJS, loader: 'babel'},
       { test: /\.vue$/, loader: 'vue'},
       {
@@ -82,10 +95,10 @@ module.exports = {
     //     NODE_ENV: '"production"'
     //   }
     // }),
-    // new webpack.optimize.UglifyJsPlugin({
-    //   compress: {
-    //     warnings: false
-    //   }
-    // })
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false
+      }
+    })
   ]
 }
