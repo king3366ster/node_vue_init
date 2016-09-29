@@ -63,8 +63,10 @@
       <simple-counter prop-c="cdata" v-on:increment="incrementTotal"></simple-counter>
       <simple-counter :prop-c="fdata" v-on:increment="incrementTotal"></simple-counter>
       <component v-bind:is="currentView">
-          <!-- component changes when vm.currentView changes! -->
       </component>
+      <div v-for="(item, index) in testList" :data-index="index">
+        key:{{item.id}}
+      </div>
     </div>
     <script src="../dist/js/test.js"></script>
   </body>

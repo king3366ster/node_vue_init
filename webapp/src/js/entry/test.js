@@ -92,7 +92,7 @@ var Foo = Vue.component('simple-counter', {
   props: {
     propC: {
       type: String,
-      required: true
+      required: false
     },
     // a number with default value
     propD: {
@@ -132,11 +132,17 @@ new Vue({
   data: {
     fdata: 'parent data',
     total: 0,
-    currentView: 'App'
+    currentView: 'App',
+    testList: [{id:3},{id:2},{id:4}]
   },
   methods: {
     incrementTotal: function () {
       this.total += 1
+    },
+    reorder () {
+      this.testList.sort((a, b) => {
+        return a.id > b.id
+      })
     }
   },
   components: { App, Foo }

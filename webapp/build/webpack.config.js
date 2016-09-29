@@ -36,7 +36,8 @@ module.exports = {
     cacheDirectory: true,
     plugins: [
       'add-module-exports',
-      'transform-runtime'
+      'transform-runtime',
+      "transform-vue-jsx"
       // 'transform-es3-property-literals',
       // 'transform-es3-member-expression-literals'
     ]
@@ -76,7 +77,15 @@ module.exports = {
   },
   devtool: 'cheap-module-source-map',
   plugins: [
-    // new webpack.optimize.UglifyJsPlugin({minimize: true}),
-    // new webpack.optimize.CommonsChunkPlugin('common.js')
+    // new webpack.DefinePlugin({
+    //   'process.env': {
+    //     NODE_ENV: '"production"'
+    //   }
+    // }),
+    // new webpack.optimize.UglifyJsPlugin({
+    //   compress: {
+    //     warnings: false
+    //   }
+    // })
   ]
 }
