@@ -1,0 +1,16 @@
+*.pyc
+*.swp
+*.swo
+
+log/*
+
+*/migrations
+*/tests.py
+
+finance/settings.py
+
+etc/*.conf
+etc/*.ini
+etc/supervisord/*.ini
+
+node_modules

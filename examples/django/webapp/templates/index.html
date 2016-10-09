@@ -1,0 +1,24 @@
+<html>
+  <head>
+    <title>test</title>
+    <link rel="stylesheet" href="/static/css/test.css">
+  </head>
+  <body>
+    {% verbatim %}
+    <div id="learn-vue">
+      <span v-bind:id="id">{{message}}</span>
+      <p v-if="seen">if seen</p>
+      <ol>
+        <li v-for="todo in todos">
+          {{ todo.text }}
+        </li>
+      </ol>
+      <button v-on:click="reverseMessage">Reverse Message</button>
+    </div>
+    {% endverbatim %}
+    <!-- <div id="test">
+      <app></app>
+    </div> -->
+    <script src="/static/js/test.js"></script>
+  </body>
+</html>
