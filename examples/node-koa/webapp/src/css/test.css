@@ -1,0 +1,13 @@
+$color_t: #f1f1f0;
+
+body {
+  position: relative;
+  display: flex;
+  .test {
+    width: calc(12 * 2)px;
+    height: auto;
+    &:hover {
+      color: $color_t;
+    }
+  }
+}
