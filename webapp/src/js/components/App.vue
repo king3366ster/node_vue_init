@@ -44,6 +44,10 @@ body {
 }
 
 #app {
+  a {
+    color: #42b983;
+    text-decoration: none;
+  }
   color: #2c3e50;
   margin-top: -100px;
   max-width: 600px;
@@ -51,10 +55,6 @@ body {
   text-align: center;
 }
 
-#app a {
-  color: #42b983;
-  text-decoration: none;
-}
 
 .logo {
   width: 100px;

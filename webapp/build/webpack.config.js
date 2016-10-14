@@ -35,7 +35,7 @@ module.exports = {
     ],
     cacheDirectory: true,
     plugins: [
-      'add-module-exports',
+      ['transform-runtime', {polyfill: false}],
       'transform-runtime',
       "transform-vue-jsx"
       // 'transform-es3-property-literals',

@@ -1,8 +1,13 @@
+import 'babel-polyfill'
 import * as testModel from 'modules/testModule'
 import lalala from 'modules/testModule2'
 lalala()
-let res = testModel.timeoutFn()
-
+async function testAsync () {
+  let res = await testModel.timeoutFn()
+  console.log(res)
+}
+testAsync()
+console.log(123123)
 import Vue from 'vue'
 import App from 'components/App'
 

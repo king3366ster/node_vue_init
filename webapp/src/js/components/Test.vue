@@ -28,7 +28,7 @@ h1 {
 .container {
   color: blue;
   p {
-    color: red;
+    color: black;
   }
 }
 </style>
