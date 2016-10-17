@@ -46,7 +46,21 @@ module.exports = {
     loaders: [
       { test: /\.html$/, loader: 'vue-html'},
       { test: /\.css$/, loader: 'style!css!postcss!autoprefixer' },
-      { test: /\.js$/, exclude: excludeJS, loader: 'babel'},
+      { test: /\.js$/, 
+        exclude: excludeJS, 
+        loader: 'babel',
+        query: {
+          presets: [
+            'stage-0',
+            ['es2015', {'loose': true, 'modules': 'commonjs'}]
+          ],
+          cacheDirectory: true,
+          plugins: [
+            'add-module-exports',
+            'transform-runtime'
+          ]
+        }
+      },
       { test: /\.vue$/, loader: 'vue'},
       {
         test: /\.(png|jpg|jpeg|gif|svg)$/,
