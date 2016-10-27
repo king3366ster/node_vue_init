@@ -36,8 +36,7 @@ module.exports = {
     cacheDirectory: true,
     plugins: [
       'add-module-exports',
-      ['transform-runtime', {polyfill: false}],
-      "transform-vue-jsx"
+      ['transform-runtime', {polyfill: false}]
       // 'transform-es3-property-literals',
       // 'transform-es3-member-expression-literals'
     ]
@@ -60,8 +59,8 @@ module.exports = {
     loaders: [
       { test: /\.html$/, loader: 'vue-html'},
       { test: /\.css$/, loader: 'style!css!postcss!postcss-cssnext' },
-      { test: /\.js$/, 
-        exclude: excludeJS, 
+      { test: /\.js$/,
+        exclude: excludeJS,
         loader: 'babel',
         query: {
           presets: [
@@ -71,8 +70,7 @@ module.exports = {
           cacheDirectory: true,
           plugins: [
             'add-module-exports',
-            ['transform-runtime', {polyfill: false}],
-            "transform-vue-jsx"
+            ['transform-runtime', {polyfill: false}]
           ]
         }
       },
