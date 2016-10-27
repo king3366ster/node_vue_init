@@ -36,28 +36,43 @@ module.exports = {
     cacheDirectory: true,
     plugins: [
       'add-module-exports',
-      'transform-runtime'
+      ['transform-runtime', {polyfill: false}],
+      "transform-vue-jsx"
       // 'transform-es3-property-literals',
       // 'transform-es3-member-expression-literals'
+    ]
+  },
+  vue: {
+    autoprefixer: false,
+    postcss: [
+      require('postcss-custom-properties')(),
+      require('postcss-calc')(),
+      require('postcss-simple-vars')(),
+      require('postcss-mixins')(),
+      require('postcss-nested')(),
+      require('postcss-cssnext')({
+        browsers: ['Android >= 4', 'iOS >= 7', 'Chrome >= 10', 'Firefox >= 10', 'IE >= 8']
+      })
     ]
   },
   module: {
     //加载器配置
     loaders: [
       { test: /\.html$/, loader: 'vue-html'},
-      { test: /\.css$/, loader: 'style!css!postcss!autoprefixer' },
+      { test: /\.css$/, loader: 'style!css!postcss!postcss-cssnext' },
       { test: /\.js$/, 
         exclude: excludeJS, 
         loader: 'babel',
         query: {
           presets: [
-            'stage-0',
+            ['stage-0'],
             ['es2015', {'loose': true, 'modules': 'commonjs'}]
           ],
           cacheDirectory: true,
           plugins: [
             'add-module-exports',
-            'transform-runtime'
+            ['transform-runtime', {polyfill: false}],
+            "transform-vue-jsx"
           ]
         }
       },
@@ -90,7 +105,15 @@ module.exports = {
   },
   devtool: 'cheap-module-source-map',
   plugins: [
-    // new webpack.optimize.UglifyJsPlugin({minimize: true}),
-    // new webpack.optimize.CommonsChunkPlugin('common.js')
+    // new webpack.DefinePlugin({
+    //   'process.env': {
+    //     NODE_ENV: '"production"'
+    //   }
+    // }),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false
+      }
+    })
   ]
 }
