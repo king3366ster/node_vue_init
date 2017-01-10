@@ -49,12 +49,12 @@ WSGI_APPLICATION = 'main.wsgi.application'
 #     }
 # }
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
 
 
 TEMPLATES = [
@@ -120,17 +120,31 @@ USE_I18N = True
 USE_L10N = False
 USE_TZ = False
 
+redis_conf = {
+    'host': '127.0.0.1',
+    'port': 6379
+}
+
+# Cache
+CACHES = {
+    'default': {
+        'BACKEND': 'redis_cache.cache.RedisCache',
+        'LOCATION': '%s:%s' % (redis_conf['host'], redis_conf['port']),
+        "OPTIONS": {
+            "CLIENT_CLASS": "redis_cache.client.DefaultClient",
+        },
+    },
+}
+
 # # Session
-# SESSION_ENGINE = 'redis_sessions.session'
-# SESSION_REDIS_HOST = 'localhost'
-# SESSION_REDIS_PORT = 6379
-# SESSION_REDIS_DB = 1
-# SESSION_REDIS_PREFIX = 'session'
+SESSION_ENGINE = 'redis_sessions.session'
+SESSION_REDIS_HOST = redis_conf['host']
+SESSION_REDIS_PORT = redis_conf['port']
+# SESSION_REDIS_DB = 0
+SESSION_REDIS_PREFIX = 'session'
 # SESSION_COOKIE_AGE = 30 * 60 * 12
 
 # 日志
 import logging
 
-DEFAULT_LOGGING_FILE = os.path.join(BASE_DIR, 'log/finance.log')
-TRADE_LOGGING_FILE = os.path.join(BASE_DIR, 'log/trade.log')
-
+DEFAULT_LOGGING_FILE = os.path.join(BASE_DIR, 'log/debug.log')
