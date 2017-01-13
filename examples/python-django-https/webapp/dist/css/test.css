@@ -1,0 +1,12 @@
+body {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+body .test {
+  width: 24px;
+  height: auto
+}
+body .test:hover {
+  color: #f1f1f0;
+}
