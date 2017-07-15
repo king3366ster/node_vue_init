@@ -24,6 +24,8 @@ app.use(session(app, {
 // body parser
 app.use(bodyParser())
 
+console.log(process.env.NODE_ENV)
+
 // for all get requests, return index.html
 app.use(async (ctx, next) => {
   if (ctx.method === 'GET') {
