@@ -1,16 +1,13 @@
-const cwd = process.cwd()
 const path = require('path')
 const globby = require('globby')
 const postcss = require('postcss')
 const webpack = require('webpack')
-const webappPath = path.join(__dirname, '../')
-const excludeJS = /(node_modules)/
+const projectRoot = path.resolve(__dirname, '../')
 
-function generateEntry (path) {
-  let globbyPaths = webappPath + path
-  let paths = globby.sync(globbyPaths)
+function generateEntry (filepath) {
+  let globbyPaths = path.join(projectRoot, filepath)
+  let paths = globby.sync(`${globbyPaths}/**/*.js`)
   let basePath = globbyPaths.replace(/[\*].*?$/, '').replace(/\\/g, '/')
-
   let result = {}
   paths.forEach(item => {
     item = item.replace(/\\/g, '/')
@@ -19,51 +16,53 @@ function generateEntry (path) {
   return result
 }
 
-module.exports = {
-  context: webappPath,
+function resolve (dir) {
+  return path.join(__dirname, '..', dir)
+}
+
+let webpackConfig = {
+
+  context: projectRoot,
   //页面入口文件配置
-  entry: generateEntry('src/js/entry/**/*.*'),
+  entry: generateEntry('src/js/entry'),
   //入口文件输出配置
   output: {
-    path: path.join(webappPath, 'dist/js'),
-    filename: '[name].js'
+    filename: '[name].js',
+    path: path.join(projectRoot, 'dist/js'),
+    // Code Splitting 用于页面按需懒加载
+    publicPath: 'dist/js/',
+    pathinfo: true
   },
-  babel: {
-    presets: [
-      ['stage-0'],
-      ['es2015', {'loose': true, 'modules': 'commonjs'}]
-    ],
-    cacheDirectory: true,
-    plugins: [
-      'add-module-exports',
-      ['transform-runtime', {polyfill: false}]
-      // 'transform-es3-property-literals',
-      // 'transform-es3-member-expression-literals'
-    ]
-  },
-  vue: {
-    autoprefixer: false,
-    postcss: [
-      require('postcss-custom-properties')(),
-      require('postcss-calc')(),
-      require('postcss-simple-vars')(),
-      require('postcss-mixins')(),
-      require('postcss-nested')(),
-      require('postcss-cssnext')({
-        browsers: ['Android >= 4', 'iOS >= 7', 'Chrome >= 10', 'Firefox >= 10', 'IE >= 8']
-      })
-    ]
+  resolve: {
+    extensions: ['.js', '.json', '.css', '.vue'],
+    alias: {
+      'vue$': 'vue/dist/vue.js',
+      '@': resolve('src')
+    }
   },
   module: {
-    //加载器配置
-    loaders: [
-      { test: /\.html$/, loader: 'vue-html'},
-      { test: /\.css$/, loader: 'style!css!postcss!postcss-cssnext' },
-      { test: /\.js$/,
-        exclude: excludeJS,
-        loader: 'babel',
+    rules: [
+      {
+        test: /\.html$/,
+        loader: 'vue-html'
+      },
+      {
+        test: /\.css$/,
+        loader: 'style!css!postcss!postcss-cssnext',
+        include: [resolve('src/css')]
+      },
+      {
+        test: /\.js$/,
+        loader: 'babel-loader',
+        include: [resolve('src/js')],
         query: {
           presets: [
+            ["env", {
+              "targets": {
+                "browsers": "> 5%"
+              },
+              "useBuiltIns": true,
+            }],
             ['stage-0'],
             ['es2015', {'loose': true, 'modules': 'commonjs'}]
           ],
@@ -71,13 +70,27 @@ module.exports = {
           plugins: [
             'add-module-exports',
             ['transform-runtime', {polyfill: false}]
+            // 'transform-es3-property-literals',
+            // 'transform-es3-member-expression-literals'
           ]
         }
       },
-      { test: /\.vue$/, loader: 'vue'},
+      {
+        test: /\.vue$/,
+        loader: 'vue-loader',
+        options: {
+          autoprefixer: false,
+          postcss: [
+            require('precss')(),
+            require('postcss-cssnext')({
+              browsers: ['Android >= 4', 'iOS >= 7', 'Chrome >= 10', 'Firefox >= 10', 'IE >= 10']
+            })
+          ]
+        }
+      },
       {
         test: /\.(png|jpg|jpeg|gif|svg)$/,
-        loader: 'url',
+        loader: 'url-loader',
         query: {
           // limit for base64 inlining in bytes
           limit: 4096,
@@ -86,32 +99,29 @@ module.exports = {
       }
     ]
   },
-  //其它解决方案配置
-  resolve: {
-    root: [
-      path.join(webappPath, 'src/js'),
-    ],
-    extensions: ['', '.js', '.json', '.css', '.vue'],
-    alias: {
-      'vue': 'vue/dist/vue.js'
-    }
-  },
-  resolveLoader: {
-    fallback: [
-      path.resolve(webappPath, '../node_modules')
-    ]
-  },
-  devtool: 'cheap-module-source-map',
   plugins: [
-    // new webpack.DefinePlugin({
-    //   'process.env': {
-    //     NODE_ENV: '"production"'
-    //   }
-    // }),
+    // 全局挂载插件
+    new webpack.ProvidePlugin({})
+  ]
+}
+
+// 生成环境要压缩
+if (process.env.NODE_ENV === 'production') {
+  webpackConfig.plugins.push(
+    // 压缩JS
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         warnings: false
+      },
+      output: {
+        comments: false
       }
     })
-  ]
+  )
+} else {
+  webpackConfig.devtool = 'source-map'
+  // webpackConfig.devtool = 'cheap-source-map',
 }
+
+
+module.exports = webpackConfig

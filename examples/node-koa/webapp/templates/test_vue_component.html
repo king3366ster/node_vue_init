@@ -1,0 +1,46 @@
+<html>
+  <head>
+    <title>test</title>
+    <link rel="stylesheet" href="../dist/css/test.css">
+  </head>
+  <body>
+    <div id="learn-vue">
+      <anchored-heading :level="1">Hello world!</anchored-heading>
+      <Test>
+        <h1 slot="header">Here might be a page title</h1>
+        <p>A paragraph for the main content.</p>
+        <p>And another one.</p>
+        <p slot="footer">Here's some contact info</p>
+        <p slot="main">
+          test main
+        </p>
+      </Test>
+    </div>
+    <div id="learn-component">
+    </div>
+
+    <!--script type="text/x-template" id="anchored-heading-template">
+      <div>
+        <h1 v-if="level === 1">
+          <slot></slot>
+        </h1>
+        <h2 v-if="level === 2">
+          <slot></slot>
+        </h2>
+        <h3 v-if="level === 3">
+          <slot></slot>
+        </h3>
+        <h4 v-if="level === 4">
+          <slot></slot>
+        </h4>
+        <h5 v-if="level === 5">
+          <slot></slot>
+        </h5>
+        <h6 v-if="level === 6">
+          <slot></slot>
+        </h6>
+      </div>
+    </script-->
+    <script src="../dist/js/test_component.js"></script>
+  </body>
+</html>
