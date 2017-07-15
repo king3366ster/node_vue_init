@@ -1,36 +1,19 @@
-// const env = require('./env')
-const path = require('path')
-const postcss = require('postcss')
-const precss = require('precss')
-
-let config = {
-  input: './webapp/src/css/**/*.css',
-  dir: './webapp/dist/css',
-  'local-plugins': true,
-  use: [
-    'precss',
-    // 'postcss-import',
-    'postcss',
-    'postcss-custom-properties',
-    'postcss-calc',
-    'postcss-simple-vars',
-    'postcss-mixins',
-    'postcss-nested',
-    // 'postcss-scss',
-    // 'cssnano',
-    // 'autoprefixer',
-    'postcss-cssnext'
-  ],
-  cssnext: {
-    browsers: ['Android >= 4', 'iOS >= 7', 'Chrome >= 10', 'Firefox >= 10', 'IE >= 8']
-  }
+let postcssConfig = {
+  'parser': require('postcss-scss'),
+  'map': 'inline',
+  // 'local-plugins': true,
+  // 'watch': true,
+  'plugins': [
+    require('precss'),
+    require('postcss-cssnext')({
+      browsers: ['Android >= 4', 'iOS >= 7', 'Chrome >= 10', 'Firefox >= 10', 'IE >= 10']
+    })
+  ]
 }
 
-// if (env.isProduction()) {
-//   config.use.push('cssnano')
-//   config.map = false
-// } else {
-//   config.map = 'inline'
-// }
+// 生成环境要压缩
+if (process.env.NODE_ENV === 'production') {
+  postcssConfig.plugins.push(require('postcss-clean'))
+}
 
-module.exports = config
+module.exports = postcssConfig

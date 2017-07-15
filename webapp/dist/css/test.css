@@ -1,6 +1,8 @@
 body {
   position: relative;
   display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
   display: -ms-flexbox;
   display: flex;
 }
@@ -11,3 +13,5 @@ body .test {
 body .test:hover {
   color: #f1f1f0;
 }
+
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uL3NyYy9jc3MvdGVzdC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBRUE7RUFDRSxtQkFBbUI7RUFDbkIscUJBQWM7RUFBZCxzQkFBYztFQUFkLGtCQUFjO0VBQWQscUJBQWM7RUFBZCxjQUFjO0NBUWY7QUFQQztFQUNFLFlBQXNCO0VBQ3RCLFlBQWE7Q0FJZDtBQUhDO0VBQ0UsZUFBZ0I7Q0FDakIiLCJmaWxlIjoidGVzdC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIkY29sb3JfdDogI2YxZjFmMDtcclxuXHJcbmJvZHkge1xyXG4gIHBvc2l0aW9uOiByZWxhdGl2ZTtcclxuICBkaXNwbGF5OiBmbGV4O1xyXG4gIC50ZXN0IHtcclxuICAgIHdpZHRoOiBjYWxjKDEyICogMilweDtcclxuICAgIGhlaWdodDogYXV0bztcclxuICAgICY6aG92ZXIge1xyXG4gICAgICBjb2xvcjogJGNvbG9yX3Q7XHJcbiAgICB9XHJcbiAgfVxyXG59XHJcbiJdfQ== */

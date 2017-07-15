@@ -1,6 +1,6 @@
 import Vue from 'vue'
-import App from 'components/App'
-import Test from 'components/Test'
+import App from '../components/App'
+import Test from '../components/Test'
 
 // Vue.component('anchored-heading', {
 //   template: '#anchored-heading-template',
@@ -50,13 +50,4 @@ new Vue({
   el: '#learn-vue',
   components: { Test }
   // template: '<app></app>'
-})
-
-new Vue({
-  el: '#learn-component',
-  render (h) {
-    return (
-      <Test></Test>
-    )
-  }
 })
