@@ -5,20 +5,71 @@
   </head>
   <body>
     {% verbatim %}
-    <div id="learn-vue">
-      <span v-bind:id="id">{{message}}</span>
-      <p v-if="seen">if seen</p>
-      <ol>
-        <li v-for="todo in todos">
-          {{ todo.text }}
-        </li>
-      </ol>
-      <button v-on:click="reverseMessage">Reverse Message</button>
+    <div id="learn-vue" v-bind:class="{isSeen: seen}">
+      <p>
+        Key Modifiers: v-on:keyup.13<br/>
+        enter/tab/delete (captures both “Delete” and “Backspace” keys)/esc/space/up/down/left/right
+        Input Modifiers: v-model.lazy
+        .lazy/.number/.trim
+      </p>
+      <input type="text" v-model="message" v-bind:class="[classA, classB]"
+      v-on:keyup.enter="keyupFn">
+      <div v-once>{{message}} render once</div>
+      <div v-html="message"></div>
+      <div :id="id">
+        {{message|capitalize}}
+        filter capitalized
+      </div>
+      <div>
+        {{reverseMessageCp}} computed value
+      </div>
+      <div class="">
+        {{watchedValue}} watched value
+      </div>
+      <a v-bind:href="url">link test</a>
+      <p>
+        events: .stop/.prevent/.capture/.self
+      </p>
+      <button @click.prevent="reverseMessage">Reverse Message</button>
+      <div>
+        v-if has higher toggle costs while v-show has higher initial render costs.
+      </div>
+      <template v-if="seen">
+        <p>
+          v-if seen {{number + 1}}
+        </p>
+      </template>
+      <template v-else>
+        <p>
+          v-else seen {{number - 1}}
+        </p>
+      </template>
+      <div v-show="seen">
+        v-show test
+      </div>
+      <ul>
+        <li v-for="(value, key, index) in objs">{{key}}-{{value}}</li>
+        <span v-for="n in 10">{{n}}</span>
+      </ul>
+      <form v-on:submit.prevent="onSubmit">
+        form data
+        <ol>
+          <todo v-for="todo of todos" :todo='todo'></todo>
+        </ol>
+      </form>
+    </div>
+    <div id="test-component">
+      <!-- <app></app> -->
+      total: {{total}}
+      <simple-counter prop-c="cdata" v-on:increment="incrementTotal"></simple-counter>
+      <simple-counter :prop-c="fdata" v-on:increment="incrementTotal"></simple-counter>
+      <component v-bind:is="currentView">
+      </component>
+      <div v-for="(item, index) in testList" :data-index="index">
+        key:{{item.id}}
+      </div>
     </div>
     {% endverbatim %}
-    <!-- <div id="test">
-      <app></app>
-    </div> -->
     <script src="/static/js/test.js"></script>
   </body>
 </html>

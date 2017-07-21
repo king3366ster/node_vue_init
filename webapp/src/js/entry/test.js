@@ -8,6 +8,17 @@ async function testAsync () {
 }
 testAsync()
 console.log(123123)
+
+console.log(1, ...[2, 3, 4], 5)
+let a = {
+  a: 1,
+  b: 2,
+  c: 3
+}
+
+let b = {...a, d: 5}
+console.log(b)
+
 import Vue from 'vue'
 import App from '../components/App'
 

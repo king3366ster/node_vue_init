@@ -8,5 +8,5 @@ function testTimeout (timeout) {
 
 export async function timeoutFn () {
   let result = await testTimeout(1204)
-  console.log(result)
+  return result
 }
